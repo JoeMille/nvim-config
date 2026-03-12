@@ -3,6 +3,13 @@ local map = vim.keymap.set
 -- Visual Block mode (frees Ctrl+V for paste)
 map("n", "<C-q>", "<C-v>", { desc = "Visual Block Mode" })
 
+-- macOS: Cmd+C/X/V for clipboard (Ctrl variants kept as fallback for terminal compat)
+map("v", "<D-c>", '"+y',    { desc = "Copy to clipboard" })
+map("v", "<D-x>", '"+d',    { desc = "Cut to clipboard" })
+map("n", "<D-v>", '"+p',    { desc = "Paste from clipboard" })
+map("i", "<D-v>", "<C-r>+", { desc = "Paste from clipboard" })
+map("v", "<D-v>", '"+p',    { desc = "Paste from clipboard" })
+
 map("v", "<C-c>", '"+y',   { desc = "Copy to clipboard" })
 map("v", "<C-x>", '"+d',   { desc = "Cut to clipboard" })
 map("n", "<C-v>", '"+p',   { desc = "Paste from clipboard" })
@@ -22,11 +29,6 @@ map("n", "<C-b>", "<cmd>lua Snacks.explorer()<cr>",       { desc = "Toggle File 
 map("n", "<C-/>", "gcc", { desc = "Toggle Comment", remap = true })
 map("v", "<C-/>", "gc",  { desc = "Toggle Comment", remap = true })
 
-map({ "n", "t" }, "<C-t>", "<cmd>1ToggleTerm direction=horizontal<cr>", { desc = "Terminal 1" })
-map({ "n", "t" }, "<C-1>", "<cmd>1ToggleTerm direction=horizontal<cr>", { desc = "Terminal 1" })
-map({ "n", "t" }, "<C-2>", "<cmd>2ToggleTerm direction=horizontal<cr>", { desc = "Terminal 2" })
-map({ "n", "t" }, "<C-3>", "<cmd>3ToggleTerm direction=horizontal<cr>", { desc = "Terminal 3" })
-map({ "n", "t" }, "<C-4>", "<cmd>4ToggleTerm direction=horizontal<cr>", { desc = "Terminal 4" })
 
 map({ "n", "t" }, "<leader>th", function()
   local terms = require("toggleterm.terminal").get_all()

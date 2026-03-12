@@ -12,7 +12,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      -- clangd installed via: sudo dnf install clang clang-tools-extra
+      -- clangd installed via: brew install llvm (add /opt/homebrew/opt/llvm/bin to PATH)
       skip_install = { "clangd" },
     },
   },

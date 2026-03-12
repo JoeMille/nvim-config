@@ -1,4 +1,12 @@
-vim.opt.clipboard    = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
+if vim.fn.has("mac") == 1 then
+  vim.g.clipboard = {
+    name = "macOS",
+    copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+    paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+    cache_enabled = 0,
+  }
+end
 vim.opt.mouse        = "a"
 vim.opt.cursorline   = true
 vim.opt.scrolloff    = 8
