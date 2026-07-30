@@ -24,12 +24,11 @@ return {
       -- 0 keeps horizontal terminals splitting side by side (VS Code style)
       -- instead of stacking once the window gets narrow.
       responsiveness  = { horizontal_breakpoint = 0 },
-      winbar = {
-        enabled = true,
-        name_formatter = function(term)
-          return string.format(" %d: %s", term.id, term.name)
-        end,
-      },
+      -- toggleterm's winbar draws clickable terminal tabs but no action buttons.
+      -- config/terminal.lua replaces it with a VS Code style panel header that
+      -- keeps the tabs and adds split / kill / hide, so this stays off to avoid
+      -- both of them fighting over the same window option.
+      winbar = { enabled = false },
     },
   },
 
