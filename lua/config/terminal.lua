@@ -196,6 +196,13 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufWinEnter", "WinEnter" }, {
     local term = terminal().get(id, true)
     if term and term.direction == "horizontal" then
       vim.opt_local.winbar = "%{%v:lua.require('config.terminal').winbar()%}"
+      -- Pin the buffer to this window. Opening a file into a terminal window is
+      -- what scrambles the layout: the file takes the panel slot, toggleterm
+      -- notices its terminal is no longer displayed and re-opens it in a fresh
+      -- split up top, and the two end up swapped. winfixbuf makes nvim refuse
+      -- the swap at the source instead of trying to undo it afterwards.
+      vim.opt_local.winfixbuf = true
+      vim.opt_local.winfixheight = true
     end
   end,
 })
