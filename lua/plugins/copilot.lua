@@ -1,19 +1,15 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    cmd   = "Copilot",
-    event = "InsertEnter",
-    opts  = {
+    -- Loaded on demand only. Inline AI suggestions are off: no ghost text, no
+    -- auto-triggering, nothing typing at you. It stays installed because
+    -- codecompanion below uses the Copilot subscription as its adapter, and it no
+    -- longer loads on InsertEnter, so it costs nothing while you edit.
+    cmd  = "Copilot",
+    opts = {
       suggestion = {
-        enabled      = true,
-        auto_trigger = true,
-        keymap = {
-          accept      = "<Tab>",
-          accept_word = "<C-Right>",
-          next        = "<M-]>",
-          prev        = "<M-[>",
-          dismiss     = "<C-]>",
-        },
+        enabled      = false,
+        auto_trigger = false,
       },
       panel     = { enabled = false },
       filetypes = { ["*"] = true },

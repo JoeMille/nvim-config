@@ -4,6 +4,10 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    -- Not lazy: the startup layout in config/autocmds.lua opens the panel, and a
+    -- `keys`-only spec means the :ToggleTerm command doesn't exist yet at that
+    -- point. Keymaps live in config/keymaps.lua instead.
+    lazy = false,
     opts = {
       size = function(term)
         if term.direction == "horizontal" then return 15
@@ -17,23 +21,15 @@ return {
       persist_size    = true,
       close_on_exit   = true,
       float_opts      = { border = "curved" },
+      -- 0 keeps horizontal terminals splitting side by side (VS Code style)
+      -- instead of stacking once the window gets narrow.
+      responsiveness  = { horizontal_breakpoint = 0 },
       winbar = {
         enabled = true,
         name_formatter = function(term)
           return string.format(" %d: %s", term.id, term.name)
         end,
       },
-    },
-    keys = {
-      { "<C-t>",      "<cmd>1ToggleTerm direction=horizontal<cr>", desc = "Terminal 1",          mode = { "n", "t" } },
-      { "<C-1>",      "<cmd>1ToggleTerm direction=horizontal<cr>", desc = "Terminal 1",          mode = { "n", "t" } },
-      { "<C-2>",      "<cmd>2ToggleTerm direction=horizontal<cr>", desc = "Terminal 2",          mode = { "n", "t" } },
-      { "<C-3>",      "<cmd>3ToggleTerm direction=horizontal<cr>", desc = "Terminal 3",          mode = { "n", "t" } },
-      { "<C-4>",      "<cmd>4ToggleTerm direction=horizontal<cr>", desc = "Terminal 4",          mode = { "n", "t" } },
-      { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>",    desc = "Terminal vertical",   mode = { "n", "t" } },
-      { "<leader>th", "<cmd>exe (bufnr('%') + 1) . 'ToggleTerm direction=horizontal'<cr>", desc = "New terminal", mode = { "n", "t" } },
-      { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>",       desc = "Terminal float",      mode = { "n", "t" } },
-      { "<leader>tl", "<cmd>ToggleTermToggleAll<cr>",              desc = "Toggle all terminals",mode = { "n", "t" } },
     },
   },
 
@@ -87,6 +83,7 @@ return {
     opts = {
       spec = {
         { "<leader>C", group = "copilot" },
+        { "<leader>t", group = "terminal" },
       },
     },
   },
