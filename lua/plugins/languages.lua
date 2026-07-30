@@ -72,17 +72,25 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      -- LazyVim declares opts_extend for this key, so these are added to its own
+      -- default list rather than replacing it.
+      -- No "jsonc": it is not a parser on the nvim-treesitter main branch (there
+      -- are no jsonc queries and it isn't in the registry) — the json parser
+      -- covers jsonc, which is why it never appeared in site/parser.
       ensure_installed = {
         "bash", "c", "cpp", "css", "dockerfile",
-        "html", "javascript", "json", "jsonc",
+        "html", "javascript", "json",
         "lua", "markdown", "markdown_inline",
         "python", "regex", "toml",
         "tsx", "typescript",
         "vim", "vimdoc", "xml", "yaml",
       },
-      highlight    = { enable = true },
-      indent       = { enable = true },
-      auto_install = true,
+      -- lazyvim.TSFeat shape; LazyVim reads these to decide whether to call
+      -- vim.treesitter.start() and set indentexpr per filetype.
+      -- auto_install is deliberately absent: neither LazyVim's spec nor the
+      -- main branch reads it, so it was inert.
+      highlight = { enable = true },
+      indent    = { enable = true },
     },
   },
 
